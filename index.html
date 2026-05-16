@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>İsim Analizi: Numeroloji & Karakter Analizi Uygulaması</title>
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: #161b26;
+            --accent-color: #8b5cf6;
+            --accent-hover: #7c3aed;
+            --text-color: #f3f4f6;
+            --text-muted: #9ca3af;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navbar */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .logo {
+            font-size: 1.3rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #a78bfa, #8b5cf6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-left: 20px;
+            font-size: 0.95rem;
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: var(--text-color);
+        }
+
+        /* Hero Section */
+        .hero {
+            max-width: 1100px;
+            margin: 60px auto 40px auto;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .badge {
+            background-color: #1e293b;
+            color: #a78bfa;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            letter-spacing: 0.5px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            font-weight: 800;
+            line-height: 1.2;
+            margin: 0 0 20px 0;
+            background: linear-gradient(135deg, #ffffff, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p {
+            color: var(--text-muted);
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 0 35px 0;
+        }
+
+        /* App Store Button */
+        .btn-appstore {
+            display: inline-flex;
+            align-items: center;
+            background-color: #111827;
+            border: 2px solid #374151;
+            color: white;
+            text-decoration: none;
+            padding: 12px 28px;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: all 0.2s;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+        }
+
+        .btn-appstore:hover {
+            background-color: var(--accent-color);
+            border-color: var(--accent-color);
+            transform: translateY(-2px);
+        }
+
+        .btn-appstore svg {
+            margin-right: 12px;
+            width: 24px;
+            height: 24px;
+            fill: currentColor;
+        }
+
+        /* Features Section */
+        .features {
+            max-width: 1100px;
+            margin: 80px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            margin-bottom: 50px;
+            font-weight: 700;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .card {
+            background-color: var(--card-bg);
+            border: 1px solid #242b3d;
+            border-radius: 20px;
+            padding: 30px;
+            transition: transform 0.3s, border-color 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            border-color: var(--accent-color);
+        }
+
+        .card-icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+
+        .card h3 {
+            margin: 0 0 10px 0;
+            font-size: 1.3rem;
+            color: #ffffff;
+        }
+
+        .card p {
+            margin: 0;
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: linear-gradient(135deg, #1e1b4b, #0f172a);
+            border-top: 1px solid #312e81;
+            border-bottom: 1px solid #312e81;
+            text-align: center;
+            padding: 60px 20px;
+            margin-top: 40px;
+        }
+
+        .cta-section h2 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        /* Footer */
+        footer {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid #1f2937;
+        }
+
+        footer .links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            margin-left: 15px;
+        }
+
+        footer .links a:hover {
+            color: var(--accent-color);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 { font-size: 2.2rem; }
+            footer { flex-direction: column; gap: 20px; text-align: center; }
+            footer .links a { margin: 0 10px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="logo">İsim Analizi</div>
+        <div class="nav-links">
+            <a href="#ozellikler">Özellikler</a>
+            <a href="support.html">Destek</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <div class="badge">✨ Yenilikçi Numeroloji Deneyimi</div>
+        <h1>İsminin Ardındaki Şifreyi<br>Ve Kişiliğini Keşfet</h1>
+        <p>Girdiğin isimlerin numerolojik frekanslarını hesapla, karakter analizini ve potansiyelini %100 yerel cihaz güvenliğiyle anında öğren.</p>
+        
+        <a href="#" class="btn-appstore">
+            <svg viewBox="0 0 24 24">
+                <path d="M18.71,19.5C17.88,20.74 17,21.95 15.66,21.97C14.32,22 13.89,21.18 12.37,21.18C10.84,21.18 10.37,21.95 9.1,22C7.79,22.05 6.8,20.68 5.96,19.47C4.25,17 2.94,12.45 4.7,9.39C5.57,7.87 7.13,6.91 8.82,6.88C10.1,6.86 11.32,7.75 12.11,7.75C12.89,7.75 14.37,6.68 15.92,6.84C16.57,6.87 18.39,7.1 19.56,8.82C19.47,8.88 17.39,10.1 17.41,12.63C17.44,15.65 20.06,16.66 20.1,16.67C20.08,16.74 19.67,18.11 18.71,19.5M15.97,4.17C16.63,3.37 17.07,2.28 16.95,1C16,1.04 14.9,1.6 14.24,2.38C13.68,3.04 13.19,4.14 13.34,5.39C14.39,5.47 15.4,4.88 15.97,4.17Z"/>
+            </svg>
+            <div>
+                <span style="font-size: 0.7rem; font-weight: 400; display: block; opacity: 0.8; text-align: left;">Download on the</span>
+                <span style="font-size: 1.1rem; line-height: 1;">App Store</span>
+            </div>
+        </a>
+    </section>
+
+    <section class="features" id="ozellikler">
+        <h2 class="section-title">Neden Bu Uygulama?</h2>
+        <div class="grid">
+            
+            <div class="card">
+                <span class="card-icon">🔮</span>
+                <h3>Detaylı Karakter Analizi</h3>
+                <p>İsimlerin harf frekanslarına dayanan kadim numeroloji algoritmalarıyla kişilik, kariyer ve ilişki yatkınlıklarını listele.</p>
+            </div>
+
+            <div class="card">
+                <span class="card-icon">🔒</span>
+                <h3>%100 On-Device Güvenlik</h3>
+                <p>Verilerin tamamen sana ait. Core Data altyapısı sayesinde girdiğin tüm isimler ve analiz geçmişi sadece senin cihazında saklanır.</p>
+            </div>
+
+            <div class="card">
+                <span class="card-icon">⚡</span>
+                <h3>İnternetsiz Tam Performans</h3>
+                <p>Uzak sunuculara bağımlılık yok. İstediğin her yerde, uçakta veya internetin çekmediği anlarda bile analizlerini saniyeler içinde yap.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="cta-section">
+        <h2>Kendini ve Sevdiklerini Keşfetmeye Hazır Mısın?</h2>
+        <p style="color: var(--text-muted); margin-bottom: 25px; max-width: 600px; margin-left: auto; margin-right: auto;">Hemen ücretsiz indir, isimlerin ardındaki gizemli dünyayı yerel ve güvenli bir deneyimle keşfetmeye başla.</p>
+        <a href="#" class="btn-appstore">
+            <svg viewBox="0 0 24 24">
+                <path d="M18.71,19.5C17.88,20.74 17,21.95 15.66,21.97C14.32,22 13.89,21.18 12.37,21.18C10.84,21.18 10.37,21.95 9.1,22C7.79,22.05 6.8,20.68 5.96,19.47C4.25,17 2.94,12.45 4.7,9.39C5.57,7.87 7.13,6.91 8.82,6.88C10.1,6.86 11.32,7.75 12.11,7.75C12.89,7.75 14.37,6.68 15.92,6.84C16.57,6.87 18.39,7.1 19.56,8.82C19.47,8.88 17.39,10.1 17.41,12.63C17.44,15.65 20.06,16.66 20.1,16.67C20.08,16.74 19.67,18.11 18.71,19.5M15.97,4.17C16.63,3.37 17.07,2.28 16.95,1C16,1.04 14.9,1.6 14.24,2.38C13.68,3.04 13.19,4.14 13.34,5.39C14.39,5.47 15.4,4.88 15.97,4.17Z"/>
+            </svg>
+            <div>
+                <span style="font-size: 0.7rem; font-weight: 400; display: block; opacity: 0.8; text-align: left;">Download on the</span>
+                <span style="font-size: 1.1rem; line-height: 1;">App Store</span>
+            </div>
+        </a>
+    </section>
+
+    <footer>
+        <div>&copy; 2026 İsim Analizi. Tüm Hakları Saklıdır.</div>
+        <div class="links">
+            <a href="index.html">Gizlilik Politikası</a>
+            <a href="support.html">Destek / İletişim</a>
+        </div>
+    </footer>
+
+</body>
+</html>
